@@ -12,6 +12,8 @@ This will run docker container pointing to wykop data folder. Now we can connect
 ## Cypher
 
 [Detail description of commands](https://neo4j.com/docs/developer-manual/current/cypher/clauses/)
+[Good explenation of MERGE and how to use it](https://www.graphgrid.com/using-neo4j-cypher-merge-effectively/)
+[MERGE with examples](https://graphaware.com/neo4j/2014/07/31/cypher-merge-explained.html)
 [Cypher cheat sheet](https://neo4j.com/docs/cypher-refcard/current/)
 [General documentation](https://neo4j.com/docs/developer-manual/current/introduction/graphdb-concepts/)
 
