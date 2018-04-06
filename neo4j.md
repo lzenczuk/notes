@@ -9,6 +9,13 @@ This will run docker container pointing to wykop data folder. Now we can connect
 - User: neo4j
 - Password: Password1
 
+### Cypher shell
+*Doesn't work :(*
+Because browser tool have performance issues it is better to use command line tool. To use it with running neo4j in docker container:
+```bash
+ docker exec -ti $(docker ps|grep neo4j|awk '{ print $1}') /var/lib/neo4j/bin/neo4j-shell
+```
+
 ## Cypher
 
 - [Detail description of commands](https://neo4j.com/docs/developer-manual/current/cypher/clauses/)
@@ -72,4 +79,30 @@ RETURN *
 ### Displaying relation label/type in results
 ```cypher
 match (p:Page)<-[r]-(u:User) return p.id, u.name, TYPE(r)
+```
+### Substrion function
+In this example substring allow to shorten description string.
+```cypher
+match (p:Page) RETURN p.id, substring(p.description, 80), p.up_votes, p.down_votes
+```
+### Collect - agregate parameter to list
+```cypher
+match (p:Page)-[:HAS_TAG]->(t:Tag) RETURN p.id, collect(t.name)
+```
+In result we getting table containing page id and list of tag names.
+### Sorting results
+```cypher
+match (t:Tag) return t.name, t.pages order by t.pages desc
+```
+### Count as group operation
+```cypher
+match (u:User)-[:UP_VOTE]->(:Page)-[:HAS_TAG]->(t:Tag) 
+return u.name as user_name, t.name as tag_name, count(t.name) as c 
+order by user_name, c desc
+```
+### Standard deviation and average
+```cypher
+match (u:User) 
+RETURN stDev(u.up_votes), avg(u.up_votes), 
+stDev(u.down_votes), avg(u.down_votes);
 ```
