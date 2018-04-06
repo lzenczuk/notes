@@ -69,3 +69,7 @@ ON MATCH SET u.links=u.links+1
 ON MATCH SET l.up=l.up+1
 RETURN *
 ```
+### Displaying relation label/type in results
+```cypher
+match (p:Page)<-[r]-(u:User) return p.id, u.name, TYPE(r)
+```
