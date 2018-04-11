@@ -2,12 +2,38 @@
 
 ## Installation
 ### Docker
+Create folders for docker volumes.
+```shell
+mkdir -p neo4j/wykop/data  neo4j/wykop/logs  neo4j/wykop/plugins
+chmod -R a+w neo4j
+```
+Second line is a nasty hack but without it neo will throws "/logs/debug.log (Permission denied)". It is possible to set correct permisions (creating group for neo) but I don't want waste time now on this.
 
-`docker run -p 7474:7474 -p 7687:7687 -v $HOME/neo4j/wykop/data:/data neo4j`
-This will run docker container pointing to wykop data folder. Now we can connect to db using browser: `http://localhost:7474`
+Run container
+`docker run -p 7474:7474 -p 7687:7687 -v $HOME/neo4j/wykop/data:/data -v $HOME/neo4j/wykop/logs:/logs -v $HOME/neo4j/wykop/plugins:/plugins neo4j:3.3.4`
 
-- User: neo4j
-- Password: Password1
+Befor starting change password. Best way to do this is to use browser: `http://localhost:7474`
+
+#### APOC
+To have access to apoc procedures download jar related to version of running neo4j and copy it to plugins folder.
+[APOC releases](https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases)
+
+To verify installation run:
+```cypher
+CALL dbms.functions() YIELD name
+WHERE name STARTS WITH 'apoc.'
+RETURN count(name)
+UNION
+CALL dbms.procedures() YIELD name
+WHERE name STARTS WITH 'apoc.'
+RETURN count(name);
+```
+Example result:
+```csv
+count(name)
+188
+253
+```
 
 ### Cypher shell
 *Doesn't work :(*
