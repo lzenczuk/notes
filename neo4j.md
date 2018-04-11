@@ -10,7 +10,10 @@ chmod -R a+w neo4j
 Second line is a nasty hack but without it neo will throws "/logs/debug.log (Permission denied)". It is possible to set correct permisions (creating group for neo) but I don't want waste time now on this.
 
 Run container
-`docker run -p 7474:7474 -p 7687:7687 -v $HOME/neo4j/wykop/data:/data -v $HOME/neo4j/wykop/logs:/logs -v $HOME/neo4j/wykop/plugins:/plugins neo4j:3.3.4`
+`docker run -p 7474:7474 -p 7687:7687 -e NEO4J_dbms_security_procedures_unrestricted=apoc.*  -v $HOME/neo4j/wykop/data:/data -v $HOME/neo4j/wykop/logs:/logs -v $HOME/neo4j/wykop/plugins:/plugins neo4j:3.3.4
+Active database: graph.db`
+
+`-e NEO4J_dbms_security_procedures_unrestricted=apoc.*` is required to use apoc without [problems](https://neo4j.com/developer/kb/explanation-of-error-procedure-is-not-available-due-to-having-restricted-access-rights-check-configuration/).
 
 Befor starting change password. Best way to do this is to use browser: `http://localhost:7474`
 
@@ -131,4 +134,23 @@ order by user_name, c desc
 match (u:User) 
 RETURN stDev(u.up_votes), avg(u.up_votes), 
 stDev(u.down_votes), avg(u.down_votes);
+```
+## APOC
+### Help - IMPORTANT
+Best source of knwoledge about apoc procedures and their signatures.
+```cypher
+call apoc.help("apoc")
+```
+### Corect properties names for yield
+YIELD require to use properties names like in signature. In example yield in pageRank expects node and score, even that we know that node is a page.
+```cypher
+match (page:Page) with collect(page) as pages
+call apoc.algo.pageRank(pages) yield node, score
+return node.id, substring(node.description, 0, 60), score
+order by score desc;
+
+match (u:User) with collect(u) as users
+call apoc.algo.pageRank(users) yield node, score
+return node.name,  score
+order by score desc;
 ```
