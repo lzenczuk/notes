@@ -139,6 +139,12 @@ Two steps
 match path = (u:User {name:"DonutDaddy"})-[:UP_VOTE*4]-(su:User) return path
 ```
 ![two steps](https://github.com/lzenczuk/notes/blob/master/n4j_two_steps.png)
+
+One or two steps
+```cypher
+match path = (u:User {name:"DonutDaddy"})-[:UP_VOTE*2..4]-(su:User) return path
+```
+![one or two steps](https://github.com/lzenczuk/notes/blob/master/n4j_one_or_two_steps.png)
 ### Substrion function
 In this example substring allow to shorten description string.
 ```cypher
