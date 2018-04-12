@@ -110,6 +110,7 @@ RETURN *
 match (p:Page)<-[r]-(u:User) return p.id, u.name, TYPE(r)
 ```
 ### Using WITH statement to "pipe" result of one query to another (?)
+With and create
 ```cypher
 CREATE (
  flight:Flight {
@@ -127,6 +128,12 @@ MATCH
  (destination:City {name:"New York"})
 CREATE (source)-[:HAS_FLIGHT]->  (flight)-[:FLYING_TO]->(destination);
 ```
+With and match
+```cypher
+match (:User {name:"DonutDaddy"})-[:UP_VOTE*3]-(p:Page) with p 
+match (p)-[:HAS_TAG]-(t:Tag) return *
+```
+![match with match example](https://github.com/lzenczuk/notes/blob/master/n4j_match_with_match.png)
 ### Matching nodes in specific distance
 One step
 ```cypher
@@ -145,6 +152,12 @@ One or two steps
 match path = (u:User {name:"DonutDaddy"})-[:UP_VOTE*2..4]-(su:User) return path
 ```
 ![one or two steps](https://github.com/lzenczuk/notes/blob/master/n4j_one_or_two_steps.png)
+
+Pages three up votes from user
+```cypher
+match path = (u:User {name:"DonutDaddy"})-[:UP_VOTE*3]-(p:Page) return path
+```
+![three up votes from user](https://github.com/lzenczuk/notes/blob/master/n4j_pages.png)
 ### Substrion function
 In this example substring allow to shorten description string.
 ```cypher
