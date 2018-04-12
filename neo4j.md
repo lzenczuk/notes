@@ -127,10 +127,18 @@ MATCH
  (destination:City {name:"New York"})
 CREATE (source)-[:HAS_FLIGHT]->  (flight)-[:FLYING_TO]->(destination);
 ```
-### Matching nodes in spacific distance
+### Matching nodes in specific distance
+One step
 ```cypher
 match path = (u:User {name:"DonutDaddy"})-[:UP_VOTE*2]-(su:User) return path
 ```
+![one step](https://github.com/lzenczuk/notes/blob/master/n4j_one_step.png)
+
+Two steps
+```cypher
+match path = (u:User {name:"DonutDaddy"})-[:UP_VOTE*4]-(su:User) return path
+```
+![two steps](https://github.com/lzenczuk/notes/blob/master/n4j_two_steps.png)
 ### Substrion function
 In this example substring allow to shorten description string.
 ```cypher
