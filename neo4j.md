@@ -109,6 +109,28 @@ RETURN *
 ```cypher
 match (p:Page)<-[r]-(u:User) return p.id, u.name, TYPE(r)
 ```
+### Using WITH statement to "pipe" result of one query to another (?)
+```cypher
+CREATE (
+ flight:Flight {
+  code:"AA920",   
+  carrier:"American Airlines", 
+  duration:305,   
+  source_airport_code:"LAX", 
+  departure:505,   
+  destination_airport_code:"JFK", 
+  arrival:990
+ }
+)WITH flight
+MATCH 
+ (source:City {name:"Los Angeles"}),   
+ (destination:City {name:"New York"})
+CREATE (source)-[:HAS_FLIGHT]->  (flight)-[:FLYING_TO]->(destination);
+```
+### Matching nodes in spacific distance
+```cypher
+match path = (u:User {name:"DonutDaddy"})-[:UP_VOTE*2]-(su:User) return path
+```
 ### Substrion function
 In this example substring allow to shorten description string.
 ```cypher
@@ -134,6 +156,24 @@ order by user_name, c desc
 match (u:User) 
 RETURN stDev(u.up_votes), avg(u.up_votes), 
 stDev(u.down_votes), avg(u.down_votes);
+```
+### Add label to existing node
+```cypher
+match (n {name:"Alex"})
+set n :Developer
+return n
+```
+## Constraints and indices
+Constraints and indices are defined on labels. It is **good practice** to add constrains before adding nodes.
+### Unique constrain
+```cypher
+CREATE CONSTRAINT ON (city: City) ASSERT city.name IS UNIQUE;
+```
+### Indexes
+It is good practice to have index on property that we plane to use often in MATCH statement.
+```cypher
+CREATE INDEX ON :City(country);
+MATCH (c:City{country:"United States of America"}) RETURN c.name as City;
 ```
 ## APOC
 ### Help - IMPORTANT
