@@ -1,5 +1,6 @@
 # Neo4j
-
+## Noe4j in practice
+[Problems when working with neo4j](https://hackernoon.com/life-after-1-year-of-using-neo4j-4eca5ce95bf5)
 ## Installation
 ### Docker
 Create folders for docker volumes.
