@@ -19,3 +19,55 @@ EOS dublin api endpoint [api1.eosdublin.io](api1.eosdublin.io)
  ```json
  {"controlled_accounts":[]}
  ```
+## Hackaton
+
+set console output to true: /home/lukaz/.local/share/eosio/nodeos/config/config.ini
+contracts-console = true
+
+run test network: nodeos -e -p eosio --plugin eosio::chain_api_plugin --plugin eosio::history_api_plugin 
+(keosd will start automatically)
+
+get correct private key: cat /home/lukaz/.local/share/eosio/nodeos/config/config.ini
+```
+signature-provider = EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV=KEY:5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
+```
+
+open wallet: cleos wallet open
+unlock wallet: cleos wallet unlock --password PW5JAUQosmy5vRo6Nz5DrkN8Ko3XjEeBp6k7aDUVKx4tUfS2eBTz8
+import key to wallet: cleos wallet import 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
+check keys: cleos wallet keys
+
+import bios contract: cleos set contract eosio Documents/eos/build/contracts/eosio.bios -p eosio
+
+## acounts
+creater keys: cleos create key
+Private key: 5Jmsawgsp1tQ3GD6JyGCwy1dcvqKZgX6ugMVMdjirx85iv5VyPR
+Public key: EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4
+
+import key to wallet: cleos wallet import 5Jmsawgsp1tQ3GD6JyGCwy1dcvqKZgX6ugMVMdjirx85iv5VyPR
+
+create user account: cleos create account eosio user EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4 EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4
+
+additional, create tester account: cleos create account eosio tester EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4 EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4
+
+check accounts: cleos get accounts EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4
+
+## building contract
+generate abi file: eosiocpp -g eossportbook.abi eossportbook.cpp
+rebuild contract: cd build; make
+
+## contract
+create account for contract: cleos create account eosio eossportbook EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4 EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4
+
+deploy esb contract: cleos set contract eossportbook Documents/eos/build/contracts/eossportbook -p eossportbook
+
+check is abi correct: cleos get abi eossportbook
+
+## actions
+```
+cleos push action eossportbook updrunners '{ "runners": [{"runner_id": 1, "runner_name": "test1"}] }' -p eossportbook
+```
+
+```
+cleos push action eossportbook updrunners '{ "runners": [{"runner_id": 1, "runner_name": "test1"}, {"runner_id": 2, "runner_name": "Hel10 0u+ ther3"}] }' -p eossportbook
+```
