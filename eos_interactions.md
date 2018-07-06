@@ -33,7 +33,7 @@ signature-provider = EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV=KEY:5
 ```
 
 open wallet: cleos wallet open
-unlock wallet: cleos wallet unlock --password PW5JAUQosmy5vRo6Nz5DrkN8Ko3XjEeBp6k7aDUVKx4tUfS2eBTz8
+unlock wallet: cleos wallet unlock --password PW5Kg7ic7PfcXcnfwzvJJLb3moGeFTJtj2W4JdLcEdcXKApvKSiqm
 import key to wallet: cleos wallet import 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
 check keys: cleos wallet keys
 
@@ -44,11 +44,16 @@ creater keys: cleos create key
 Private key: 5Jmsawgsp1tQ3GD6JyGCwy1dcvqKZgX6ugMVMdjirx85iv5VyPR
 Public key: EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4
 
+cleos create key
+Private key: 5Jm4C6HPAU5tZ9dbpqjGan3hUCG6MdUna44orVxgyAmjeQinBqD
+Public key: EOS8AT1m2gPYSMo9RWGqgk4V9QT3PWaA2VG4ZUArSGp8bnWH5n671
+
 import key to wallet: cleos wallet import 5Jmsawgsp1tQ3GD6JyGCwy1dcvqKZgX6ugMVMdjirx85iv5VyPR
+import key to wallet: cleos wallet import 5Jm4C6HPAU5tZ9dbpqjGan3hUCG6MdUna44orVxgyAmjeQinBqD
 
 create user account: cleos create account eosio user EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4 EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4
 
-additional, create tester account: cleos create account eosio tester EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4 EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4
+additional, create tester account: cleos create account eosio tester EOS8AT1m2gPYSMo9RWGqgk4V9QT3PWaA2VG4ZUArSGp8bnWH5n671 EOS8AT1m2gPYSMo9RWGqgk4V9QT3PWaA2VG4ZUArSGp8bnWH5n671
 
 check accounts: cleos get accounts EOS7ijWCBmoXBi3CgtK7DJxentZZeTkeUnaSDvyro9dq7Sd1C3dC4
 
@@ -65,9 +70,9 @@ check is abi correct: cleos get abi eossportbook
 
 ## actions
 ```
-cleos push action eossportbook updrunners '{ "runners": [{"runner_id": 1, "runner_name": "test1"}] }' -p eossportbook
+cleos push action eossportbook updrunners '{ "runners": [{"runner_id": 1, "event_id": 1, "runner_name": "test1"}] }' -p eossportbook
 ```
 
 ```
-cleos push action eossportbook updrunners '{ "runners": [{"runner_id": 1, "runner_name": "test1"}, {"runner_id": 2, "runner_name": "Hel10 0u+ ther3"}] }' -p eossportbook
+cleos push action eossportbook updevents '{ "events_to_update": [{"event_id": 1, "event_name": "test 1"}, {"event_id":2, "event_name":"test 2"}] }' -p eossportbook
 ```
