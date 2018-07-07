@@ -33,7 +33,9 @@ signature-provider = EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV=KEY:5
 ```
 
 open wallet: cleos wallet open
+
 unlock wallet: cleos wallet unlock --password PW5Kg7ic7PfcXcnfwzvJJLb3moGeFTJtj2W4JdLcEdcXKApvKSiqm
+
 import key to wallet: cleos wallet import 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
 check keys: cleos wallet keys
 
@@ -75,4 +77,8 @@ cleos push action eossportbook updrunners '{ "runners": [{"runner_id": 1, "event
 
 ```
 cleos push action eossportbook updevents '{ "events_to_update": [{"event_id": 1, "event_name": "test 1"}, {"event_id":2, "event_name":"test 2"}] }' -p eossportbook
+```
+
+```
+cleos push action eossportbook updoffers '{ "offers_to_update": [{"runner_id": 2, "price": 4.25, "max_amount": 130}, {"runner_id": 1, "price": 2.11, "max_amount": 98}, {"runner_id": 3, "price": 3.54, "max_amount": 1223}, {"runner_id": 4, "price": 1.89, "max_amount": 215}, {"runner_id": 5, "price": 2.12, "max_amount": 755}, {"runner_id": 6, "price": 8.11, "max_amount": 424}, {"runner_id": 7, "price": 3.0, "max_amount": 1505}, {"runner_id": 8, "price": 3.77, "max_amount": 334}] }' -p eossportbook
 ```
