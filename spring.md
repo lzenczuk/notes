@@ -81,3 +81,52 @@ Add spring dev tools to dependencies
 </dependency>
 ```
 When *build* (CTRL-F9) a project it will be autorestarted.
+### Configuartion
+Use @Value annotation to set value in bean from file (application.properties) or other sourece.
+```java
+@Service
+public class HelloService {
+
+    private static Logger log = LoggerFactory.getLogger(HelloService.class);
+
+    @Value("${name}")
+    private String name;
+
+    public void sayHello(){
+        log.info("Hello "+name);
+    }
+}
+```
+#### Simple unit test
+In unit tests set this field using reflection
+```java
+@Test
+    public void setPropertyFromTest(){
+        HelloService helloService = new HelloService();
+
+        ReflectionTestUtils.setField(helloService, "name", "Test");
+
+        helloService.sayHello();
+    }
+```
+#### Spring test
+In full spring test using properties file with the same name and path what test class
+```java
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
+@TestPropertySource
+public class HelloServiceTwoTest {
+
+    @Autowired
+    private HelloService helloService;
+
+    @Test
+    public void setPropertyFromTest(){
+        helloService.sayHello();
+    }
+}
+```
+File HelloServiceTwoTest.properties
+```java
+name=Test property
+```
