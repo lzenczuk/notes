@@ -72,12 +72,12 @@ private static Logger log = LoggerFactory.getLogger(HelloService.class);
 Without clean install may not works!
 ### Auto restart
 Add spring dev tools to dependencies
-```java
+```xml
 <!-- DevTools  - auto restart -->
 <dependency>
 	<groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-devtools</artifactId>
-  <optional>true</optional>
+	<artifactId>spring-boot-devtools</artifactId>
+	<optional>true</optional>
 </dependency>
 ```
 When *build* (CTRL-F9) a project it will be autorestarted.
