@@ -32,11 +32,6 @@
 ```
 p2p-peer-address = jungle.cryptolions.io:19876
 p2p-peer-address = dev.cryptolions.io:39876
-p2p-peer-address = 193.93.219.219:9876
-p2p-peer-address = 94.154.212.15:9878
-p2p-peer-address = test-p2p.eosio.cr:2086
-p2p-peer-address = dolphin.eosblocksmith.io:9200
-p2p-peer-address = komododragon.eosbp.mixbytes.io:9876
-p2p-peer-address = 79.137.175.6:9876
-
 ```
+* Download jungle [genesis file](https://github.com/CryptoLions/EOS-Jungle-Testnet/blob/master/genesis.json)
+* Run `./nodeos --delete-all-blocks  --genesis-json ~/.local/share/eosio/nodeos/config/genesis.json`
