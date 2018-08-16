@@ -1,3 +1,7 @@
+# Merge changes from remote repo
+* Fetch interesting tag `git fetch https://github.com/EOSIO/eos.git "refs/tags/v1.2.1:refs/tags/v1.2.1"`
+* Merge tag to your current branch `git merge tags/v1.1.6`
+* Resolve conflicts like in any other merge
 # Build
 * Fork repository
 * Create brnach from tag: `git checkout tags/v1.1.4 -b lz_plugin_dev`
