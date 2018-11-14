@@ -81,3 +81,36 @@ In `package.json` remove `main` entry, make package private and add build script
 ```
 ### Build project
 `npm run build`
+## React
+Sources:
+- [How to Create a React app from scratch using Webpack 4](https://medium.freecodecamp.org/part-1-react-app-from-scratch-using-webpack-4-562b1d231e75)
+- [Tutorial: How to set up React, webpack 4, and Babel 7 (2018)](https://www.valentinog.com/blog/react-webpack-babel/)
+
+### Improve webpack with modes (this will remove worrning)
+Modify script section in package.js
+```javascript
+    "start": "webpack --mode development",
+    "build": "webpack --mode production"
+```
+### Install react
+`npm install --save react react-dom`
+Add dev dependencies
+`npm install --save-dev @babel/core babel-loader @babel/preset-env @babel/preset-react`
+
+- babel-core - ES6 -> ES5 transformation
+- babel-loader - webpack helper to transfer dependencies using babel instead webpack (ES6 imports support)
+- babel-preset-env - choose polyfills based on browsers we want to support
+- babel-preset-react - babel react plugin to support JSX
+
+Add `.bablerc` to provide babel configuration
+```javascript
+{
+  "presets": ["@babel/preset-env", "@babel/preset-react"]
+}
+```
+Move `index.html` from `dist` to `src` and add plugin to generate new one in dist.
+`npm install --save-dev  html-webpack-plugin`
+
+
+
+
