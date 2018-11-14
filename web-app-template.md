@@ -110,7 +110,11 @@ Add `.bablerc` to provide babel configuration
 ```
 Move `index.html` from `dist` to `src` and add plugin to generate new one in dist.
 `npm install --save-dev  html-webpack-plugin`
+### Automate build process with webpack server
+Install server plugin `npm install --save-dev webpack-dev-server`
 
-
-
-
+Modify start script
+```javascript
+"start": "webpack-dev-server --mode development --open",
+```
+This will start nodjs server listaning on localhost:8080 and open browser. It will also rebuild and refresh page after changes.
