@@ -41,3 +41,18 @@ Fri Jul 26 21:10:10 2019
 |=============================================================================|
 +-----------------------------------------------------------------------------+
 ```
+# Jupyter notebook with nvidia GPU
+## Run tensorflow image
+Tensorflow project provides ready to use images with [TF and jupyter](https://www.tensorflow.org/install/docker).
+
+Basic command to run notebook is:
+```
+docker run --runtime=nvidia -it -p 8888:8888 --name deep_learning_keras tensorflow/tensorflow:nightly-py3-jupyter
+```
+TF image contains floder `/tf` with `tensorflow-tutorials` notebooks folder. To add your own notebook which is outside container use docker's '-v' param.
+```
+docker run --runtime=nvidia -it -p 8888:8888 -v /home/lucjan/Documents/deep_learning_keras:/tf/deep_learning_keras --name deep_learning_keras tensorflow/tensorflow:nightly-py3-jupyter
+```
+TF image don't contain keras. To install it connect to container `docker exec -it deep_learning_keras bash` and install keras `pip install keras`.
+## Open notebook
+Link to notebook with session will be in logs.
