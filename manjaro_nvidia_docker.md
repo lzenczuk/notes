@@ -51,8 +51,21 @@ docker run --runtime=nvidia -it -p 8888:8888 --name deep_learning_keras tensorfl
 ```
 TF image contains floder `/tf` with `tensorflow-tutorials` notebooks folder. To add your own notebook which is outside container use docker's '-v' param.
 ```
-docker run --runtime=nvidia -it -p 8888:8888 -v /home/lucjan/Documents/deep_learning_keras:/tf/deep_learning_keras --name deep_learning_keras tensorflow/tensorflow:nightly-py3-jupyter
+docker run --runtime=nvidia -it -p 8888:8888 -v /home/lucjan/Documents/notebooks:/tf/notebooks --name deep_learning_keras tensorflow/tensorflow:nightly-py3-jupyter
 ```
-TF image don't contain keras. To install it connect to container `docker exec -it deep_learning_keras bash` and install keras `pip install keras`.
+## Install additional dependencies
+<s>TF image don't contain keras. To install it connect to container `docker exec -it deep_learning_keras bash` and install keras `pip install keras`.</s>
+
+TF2 image have keras installed already.
+
+Connect to container `docker exec -it deep_learning_keras bash`
+
+To be able to display keras model structure install:
+```
+apt update
+apt upgrade
+apt install graphviz
+pip install  pydot pydotplus graphviz
+```
 ## Open notebook
 Link to notebook with session will be in logs.
