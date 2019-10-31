@@ -1,0 +1,4 @@
+- Install C++ extension
+- Open configuration: Ctrl+Shift+P
+- Enter: "C/C++ Edit configurations (json)"
+- Add to "includePath": "${workspaceFolder}/contracts/eos/**", "/usr/opt/eosio.cdt/1.6.1/include/**"
