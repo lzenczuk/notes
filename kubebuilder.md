@@ -15,3 +15,8 @@ go mod init mykubeop
 kubebuilder init --domain lzenczuk.github.com
 ```
 This will create bunch of files and folders. One worth to modify is `hack/boilerplate.go.txt` which contains header (licence info) added to all generated go files.
+
+# Add API - define new kind and related controller
+```bash
+kubebuilder create api --group batch --version v1 --kind CronJob
+```
